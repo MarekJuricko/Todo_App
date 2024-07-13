@@ -5,7 +5,9 @@ import { FaTrash, FaEdit, FaCheck, FaTimes, FaStar } from 'react-icons/fa';
 const TodoItem = ({ todo, fetchTodos }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(todo.task);
-  const [isStarred, setIsStarred] = useState(todo.isStarred || false);
+  const [priority, setPriority] = useState(todo.priority || 'low');
+  const [showPrioritySelector, setShowPrioritySelector] = useState(false);
+
 
   // Function to toggle the completion status of the todo item
   const toggleComplete = async () => {
@@ -36,11 +38,11 @@ const TodoItem = ({ todo, fetchTodos }) => {
     fetchTodos(); // Refresh the list of todos
   };
 
-  // Function to toggle the starred state of the todo item
-  const toggleStarred = async () => {
-    const newStarredState = !isStarred;
-    await axios.put(`https://66912fd526c2a69f6e8ed197.mockapi.io/todos/${todo.id}`, { ...todo, isStarred: newStarredState });
-    setIsStarred(newStarredState); // Update local state
+  // Function to handle priority change
+  const handlePriorityChange = async (newPriority) => {
+    setPriority(newPriority);
+    setShowPrioritySelector(true); // Close the dropdown
+    await axios.put(`https://66912fd526c2a69f6e8ed197.mockapi.io/todos/${todo.id}`, { ...todo, priority: newPriority });
     fetchTodos(); // Refresh the list of todos
   };
 
@@ -61,14 +63,35 @@ const TodoItem = ({ todo, fetchTodos }) => {
         // Render task details and action buttons when not editing
         <div>
           <p>{todo.task}</p>
+
           <button
             className={`complete-button ${todo.completed ? 'incomplete' : 'complete'}`}
             onClick={toggleComplete}>
             {todo.completed ? <FaTimes /> : <FaCheck />}
           </button>
-          <button onClick={toggleStarred}><FaStar className={`star ${isStarred ? 'starred' : ''}`} /></button>
-          <button onClick={toggleEditMode}><FaEdit /></button>
-          <button onClick={deleteTodo}><FaTrash /></button>
+
+          <button 
+            onClick={() => setShowPrioritySelector(prev => !prev)}
+            className={`priority-button ${priority}`}
+          >
+            <FaStar className={`star ${priority} }`} />
+            {showPrioritySelector && (
+              <div className="priority-selector">
+                <button 
+                  onClick={() => handlePriorityChange('low')}>Low
+                </button>
+                <button 
+                  onClick={() => handlePriorityChange('medium')}>Medium
+                </button>
+                <button 
+                  onClick={() => handlePriorityChange('high')}>High
+                </button>
+              </div>
+            )}
+          </button>
+
+          <button onClick={toggleEditMode} className='edit'><FaEdit /></button>
+          <button onClick={deleteTodo} className='delete'><FaTrash /></button>
         </div>
       )}
     </div>

@@ -63,12 +63,24 @@
 }
 
 /* Styling for the star icon */
-.todo-item .star {
-  color: rgb(75, 75, 75);
+.todo-item .star.low {
+  color: rgb(205, 127, 50); /* Bronze color for low priority */
 }
 
-.todo-item .star.starred {
-  color: gold;
+.todo-item .star.medium {
+  color: rgb(245, 245, 245); /* Silver color for medium priority */
+}
+
+.todo-item .star.high {
+  color: rgb(255, 215, 0); /* Gold color for high priority */
+}
+
+.todo-item .edit:hover{
+  color: aqua;
+}
+
+.todo-item .delete:hover{
+  color: red;
 }
 
 /* Styling for the edit input field */
