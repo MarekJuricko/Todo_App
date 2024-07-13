@@ -3,14 +3,49 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Full viewport for app-container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s ease-in;
+}
+
+/* Light mode styles */
+.app-container.light {
+  background-color: rgb(205, 205, 205); 
+  color: black; 
+}
+
+/* Dark mode styles */
+.app-container.dark {
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
+
+/* Light mode styles for todo container */
+.todo-container.light {
+  background-color: rgb(205, 205, 205);
+  color: black;
+}
+
+/* Dark mode styles for todo container */
+.todo-container.dark {
+  background-color: rgb(20, 20, 20);
+  color: white;
 }
 
 /* Styling for the container */
 .todo-container {
   max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   padding: 20px;
+  border-radius: 0.5em;
+  transition: 0.5s ease-in;
 }
 
 /* Styling for the todo list */
@@ -27,7 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(175, 175, 175);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -35,37 +70,43 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Dark mode styles for todo item */
+.todo-container.dark .todo-item {
+  background-color: rgb(50, 50, 50);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
 .todo-item p {
   margin: 0 0 10px 0;
 }
 
-.todo-item .icon{
+.todo-item .icon {
   font-size: 1.3em;
 }
 
-.todo-item .todo-title{
+.todo-item .todo-title {
   font-size: 1.3em;
 }
 
-.todo-item .todo-due-date{
+.todo-item .todo-due-date {
   font-size: 0.8em;
 }
 
 .due-date {
-  display: flex; 
+  display: flex;
   align-items: center;
 }
 
 .calendar-icon {
-  margin-right: 8px; 
-  font-size: 16px; 
-  line-height: 1; 
-  vertical-align: middle; 
+  margin-right: 8px;
+  font-size: 16px;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 .todo-due-date {
   margin: 0;
-  font-size: 14px; 
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -93,11 +134,16 @@
 }
 
 /* Styling for the star icon */
-.priority-selector button{
+.priority-selector button {
   color: black;
 }
 
-.todo-item .star{
+/* Dark mode styles for star icon buttons */
+.todo-container.dark .priority-selector button {
+  color: white;
+}
+
+.todo-item .star {
   font-size: 1.3em;
 }
 
@@ -113,11 +159,11 @@
   color: rgb(255, 215, 0); /* Gold color for high priority */
 }
 
-.todo-item .edit:hover{
+.todo-item .edit:hover {
   color: aqua;
 }
 
-.todo-item .delete:hover{
+.todo-item .delete:hover {
   color: red;
 }
 
@@ -128,6 +174,13 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+/* Dark mode styles for input fields */
+.todo-container.dark .todo-item input {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
 }
 
 .add-todo-form {
@@ -145,6 +198,13 @@
   border-radius: 5px;
 }
 
+/* Dark mode styles for form input */
+.todo-container.dark .add-todo-form input {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
 .add-todo-form button {
   padding: 10px 20px;
   border: 1px solid #32cd32;
@@ -158,6 +218,20 @@
 .add-todo-form button:hover {
   border: 1px solid black;
   color: black;
+}
+
+/* Theme toggle button styles */
+.theme-toggle-button {
+  margin: 10px auto;
+  padding: 10px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Dark mode styles for theme toggle button */
+.todo-container.dark .theme-toggle-button {
+  background-color: #444;
+  color: white;
 }
 
 /* Responsive design */
