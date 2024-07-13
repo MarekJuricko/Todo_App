@@ -39,6 +39,32 @@
   margin: 0 0 10px 0;
 }
 
+.todo-item .todo-title{
+  font-size: 1.3em;
+}
+
+.todo-item .todo-due-date{
+  font-size: 0.8em;
+}
+
+.due-date {
+  display: flex; 
+  align-items: center;
+}
+
+.calendar-icon {
+  margin-right: 8px; 
+  font-size: 16px; 
+  line-height: 1; 
+  vertical-align: middle; 
+}
+
+.todo-due-date {
+  margin: 0;
+  font-size: 14px; 
+  line-height: 1.5;
+}
+
 /* Styling for buttons */
 .todo-item button {
   background: none;

@@ -3,10 +3,16 @@ import axios from 'axios';
 
 const AddTodo = ({ addTodo }) => {
   const [task, setTask] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
-  // Function to handle changes in the input field
+  // Function to handle changes in the input fields
   const handleChange = (e) => {
-    setTask(e.target.value); // Update the task state with the input value
+    const { name, value } = e.target;
+    if (name === 'task') {
+      setTask(value); // Update the task state with the input value
+    } else if (name === 'dueDate') {
+      setDueDate(value); // Update the dueDate state with the input value
+    }
   };
 
   // Function to handle form submission
@@ -17,13 +23,18 @@ const AddTodo = ({ addTodo }) => {
     }
     try {
       // Send a POST request to create a new todo item
-      const response = await axios.post('https://66912fd526c2a69f6e8ed197.mockapi.io/todos', { task, completed: false });
+      const response = await axios.post('https://66912fd526c2a69f6e8ed197.mockapi.io/todos', {
+        task,
+        dueDate,
+        completed: false,
+      });
       // Call the addTodo function passed from the parent component to add the new task
       addTodo(response.data);
-      // Clear the input field after adding the task
+      // Clear the input fields after adding the task
       setTask('');
+      setDueDate('');
     } catch (error) {
-      // Shows an error if the POST request fails
+      // Show an error if the POST request fails
       console.error('Error adding todo:', error);
     }
   };
@@ -32,9 +43,16 @@ const AddTodo = ({ addTodo }) => {
     <form onSubmit={handleSubmit} className="add-todo-form">
       <input
         type="text"
+        name="task"
         value={task}
         onChange={handleChange}
         placeholder="Add a new task"
+      />
+      <input
+        type="date"
+        name="dueDate"
+        value={dueDate}
+        onChange={handleChange}
       />
       <button type="submit">Add Task</button>
     </form>
