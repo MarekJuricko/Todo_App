@@ -31,12 +31,16 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-family: 'Montserrat', sans-serif;
 }
 
 .todo-item p {
   margin: 0 0 10px 0;
+}
+
+.todo-item .icon{
+  font-size: 1.3em;
 }
 
 .todo-item .todo-title{
@@ -81,7 +85,7 @@
 }
 
 .todo-item .complete-button.complete {
-  color: green; /* Green color for FaCheck */
+  color: limegreen; /* Green color for FaCheck */
 }
 
 .todo-item .complete-button.incomplete {
@@ -89,6 +93,14 @@
 }
 
 /* Styling for the star icon */
+.priority-selector button{
+  color: black;
+}
+
+.todo-item .star{
+  font-size: 1.3em;
+}
+
 .todo-item .star.low {
   color: rgb(205, 127, 50); /* Bronze color for low priority */
 }

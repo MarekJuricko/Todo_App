@@ -67,8 +67,8 @@ const TodoItem = ({ todo, fetchTodos }) => {
             value={editedDueDate}
             onChange={handleDueDateChange} 
           />
-          <button onClick={handleEditSubmit}><FaCheck /></button>
-          <button onClick={toggleEditMode}><FaTimes /></button>
+          <button onClick={handleEditSubmit}><FaCheck className='icon' /></button>
+          <button onClick={toggleEditMode}><FaTimes className='icon' /></button>
         </div>
       ) : (
         // Render task details and action buttons when not editing
@@ -85,7 +85,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
           <button
             className={`complete-button ${todo.completed ? 'incomplete' : 'complete'}`}
             onClick={toggleComplete}>
-            {todo.completed ? <FaTimes /> : <FaCheck />}
+            {todo.completed ? <FaTimes className='icon' /> : <FaCheck className='icon' />}
           </button>
 
           <button
@@ -104,8 +104,8 @@ const TodoItem = ({ todo, fetchTodos }) => {
 
           </button>
 
-          <button onClick={toggleEditMode} className='edit'><FaEdit /></button>
-          <button onClick={deleteTodo} className='delete'><FaTrash /></button>
+          <button onClick={toggleEditMode} className='edit'><FaEdit className='icon' /></button>
+          <button onClick={deleteTodo} className='delete'><FaTrash className='icon' /></button>
         </div>
       )}
     </div>
