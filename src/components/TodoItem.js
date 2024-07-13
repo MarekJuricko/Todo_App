@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaTrash, FaEdit, FaCheck, FaTimes, FaStar, FaCalendarAlt } from 'react-icons/fa';
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, differenceInDays } from 'date-fns';
 
 const TodoItem = ({ todo, fetchTodos }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -52,6 +52,23 @@ const TodoItem = ({ todo, fetchTodos }) => {
     fetchTodos(); // Refresh the list of todos
   };
 
+  // Function to determine the color of the due date icon based on the remaining days
+  const getDueDateColor = () => {
+    if (!todo.dueDate) return 'black'; // Default color if no due date is set
+
+    const daysLeft = differenceInDays(parseISO(todo.dueDate), new Date());
+
+    if (daysLeft < 0) {
+      return 'red'; // Overdue
+    } else if (daysLeft <= 3) {
+      return 'orange'; // Due soon
+    } else if (daysLeft <= 7) {
+      return 'yellow'; // Upcoming
+    } else {
+      return 'green'; // Plenty of time
+    }
+  };
+
   return (
     <div className="todo-item">
       {isEditing ? (
@@ -75,7 +92,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
         <div>
           <p className='todo-title'>{todo.task}</p>
           <span className="due-date">
-            <FaCalendarAlt className="calendar-icon" />
+            <FaCalendarAlt className="calendar-icon" style={{ color: getDueDateColor() }} />
             <span className="todo-due-date">
               Due Date: {todo.dueDate ? format(parseISO(todo.dueDate), 'dd-MM-yyyy') : 'No due date'}
            </span>
